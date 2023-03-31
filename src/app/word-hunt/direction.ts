@@ -3,4 +3,10 @@ export const enum Direction {
   RIGHT,
   UP,
   DOWN
+
+
+}
+
+export function allDirections() : Direction[] {
+    return [Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT];
 }

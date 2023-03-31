@@ -29,4 +29,8 @@ export class Vector {
       }
     }
   }
+
+  public toString(): String {
+    return `(${this.row},${this.column})`;
+  }
 }

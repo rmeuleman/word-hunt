@@ -1,4 +1,5 @@
 import { Cell } from "./cell";
+import { Disposition } from "./disposition";
 import { Location } from "./location";
 import { Vector } from "./vector";
 
@@ -35,7 +36,9 @@ export class Grid {
     return new Grid(cells, size);
   }
 
-  public putWord(firstLetterLocation: Location, word: string, vector: Vector) {
+  public putWord(word: string, disposition: Disposition) {
+    const {firstLetterLocation, vector} = disposition;
+
     if(firstLetterLocation.row < 0 || firstLetterLocation.column < 0 || firstLetterLocation.row >= this.size || firstLetterLocation.column >= this.size) {
       throw new Error(`invalid location: ${firstLetterLocation.toString()}`);
     }

@@ -14,4 +14,8 @@ export class Location {
   public toString(): String {
     return `[${this.row},${this.column}]`;
   }
+
+  public equals(location: Location): boolean {
+    return this.row == location.row && this.column == location.column;
+  }
 }

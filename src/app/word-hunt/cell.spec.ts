@@ -2,7 +2,7 @@ import { Cell } from "./cell";
 import { Location } from "./location";
 
 
-describe('cell', () => {
+describe('Cell', () => {
   describe('create', () => {
     it('should return empty cell', () => {
       const cell = Cell.create(new Location(0,0));
