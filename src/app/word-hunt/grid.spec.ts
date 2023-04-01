@@ -5,14 +5,6 @@ import { Location } from "./location";
 import { Vector } from "./vector";
 
 describe('Grid', () => {
-  // var grid = Grid.create(5);
-  // grid.putWord(new Location(0,0), 'UN', Vector.create(Direction.RIGHT));
-  // grid.putWord(new Location(0,4), 'DEUX', Vector.create(Direction.DOWN));
-  // grid.putWord(new Location(4,4), 'TROIS', Vector.create(Direction.LEFT));
-  // grid.putWord(new Location(3,0), 'LOL', Vector.create(Direction.UP));
-  // console.log(grid.toString()); 
-
-
   describe('create', () => {
     it('should throw exception on invalid size', () => {
       expect(() => Grid.create(-1)).toThrowError('size must be greather than 2');
@@ -40,6 +32,12 @@ describe('Grid', () => {
   })
 
   describe('putWord', () => {
+    it('should throw exception on word put twice', () => {
+      const grid = Grid.create(3);
+      grid.putWord('MOT', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)));
+      expect(() => grid.putWord('MOT', new Disposition(new Location(1, 0), Vector.create(Direction.RIGHT)))).toThrowError('cannot put the same word twice: MOT');
+    })
+
     it('should throw exception on too long word', () => {
       const grid = Grid.create(4);
       expect(() => grid.putWord('ARBRE', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)))).toThrowError('word is too long: ARBRE');

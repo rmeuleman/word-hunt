@@ -6,6 +6,7 @@ import { Vector } from "./vector";
 export class Grid {
   readonly cells:Cell[][];
   readonly size: number;
+  readonly words: string[];
 
   public static MINIMUM_SIZE = 2;
 
@@ -18,6 +19,7 @@ export class Grid {
   {
     this.cells = cells;
     this.size = size;
+    this.words = [];
   }
 
   public static create(size: number): Grid {
@@ -51,6 +53,10 @@ export class Grid {
       throw new Error(`word is too long: ${word}`);
     }
 
+    if(this.words.includes(word)) {
+      throw new Error(`cannot put the same word twice: ${word}`);
+    }
+
     for(var index = 0; index < word.length; index++) {
       let location = new Location(firstLetterLocation.row + (vector.row * index), firstLetterLocation.column + (vector.column * index))
       if(location.row < 0 || location.column < 0 || location.row >= this.size || location.column >= this.size) {
@@ -66,6 +72,8 @@ export class Grid {
       let location = new Location(firstLetterLocation.row + (vector.row * index), firstLetterLocation.column + (vector.column * index))
       this.cells[location.row][location.column].putLetter(word.charAt(index));
     }
+
+    this.words.push(word);
   }
 
   public toString(): String {

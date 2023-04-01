@@ -23,4 +23,5 @@ export class GridConfigurationFormComponent implements OnInit {
   onSubmit() {
     this.router.navigate(['/grid-view'], {queryParams: this.gridConfiguration})
   }
+  
 }

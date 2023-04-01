@@ -4,6 +4,7 @@ import { Grid } from '../grid';
 import { GridConfiguration } from '../grid-configuration';
 import { GridGenerator } from '../grid-generator';
 import { WordGenerator } from '../word-generator';
+import { WordGeneratorService } from '../word-generator.service';
 
 @Component({
   selector: 'app-grid-view',
@@ -21,6 +22,7 @@ export class GridViewComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private wordGeneratorService: WordGeneratorService
   ) {}
 
   ngOnInit(): void {
@@ -28,14 +30,14 @@ export class GridViewComponent implements OnInit, AfterViewInit {
       this.gridConfiguration = new GridConfiguration(params['gridSize']);
     })
 
-    const wordGenerator = new WordGenerator([
-      'MOT', // 3-letter word
-      'DENT', // 4-letter word
-      'ARBRE', // 5-letter word
-      'BIERRE', // 6-letter word
-    ])
+    // const wordGenerator = new WordGenerator([
+    //   'MOT', // 3-letter word
+    //   'DENT', // 4-letter word
+    //   'ARBRE', // 5-letter word
+    //   'BIERRE', // 6-letter word
+    // ])
 
-    const gridGenerator = new GridGenerator(wordGenerator);
+    const gridGenerator = new GridGenerator(this.wordGeneratorService.getWordGenerator(), this.gridConfiguration);
 
     this.grid = gridGenerator.generateGrid();
     console.log(this.grid.toString());
@@ -50,8 +52,6 @@ export class GridViewComponent implements OnInit, AfterViewInit {
     this.gridContext.fillStyle = '#000000';
 
     const rectSize = 40;
-    const offsetX = 10;
-    const offsetY = 10;
 
     const fontSize = rectSize - 2;
     this.gridContext.font = `${fontSize}px arial`;
@@ -61,8 +61,8 @@ export class GridViewComponent implements OnInit, AfterViewInit {
     this.grid.cells.flatMap(cell => cell).forEach(cell => {
       
       this.gridContext.beginPath();
-      let x = (cell.location.column * rectSize) + offsetX;
-      let y = (cell.location.row * rectSize) + offsetY;
+      let x = (cell.location.column * rectSize);
+      let y = (cell.location.row * rectSize);
       this.gridContext.rect(x, y, rectSize, rectSize);
       this.gridContext.stroke();
 

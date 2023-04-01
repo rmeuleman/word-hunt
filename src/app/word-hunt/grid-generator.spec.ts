@@ -2,6 +2,7 @@ import { Grid } from "./grid";
 import { GridGenerator } from "./grid-generator";
 import { WordGenerator } from "./word-generator";
 import { Cell } from "./cell";
+import { GridConfiguration } from "./grid-configuration";
 
 
 describe('GridGenerator', () => {
@@ -19,11 +20,12 @@ describe('GridGenerator', () => {
     'OUI' 
   ]
   const wordGenerator = new WordGenerator(words);
-  const gridGenerator = new GridGenerator(wordGenerator);
+  const gridConfiguration = new GridConfiguration(6);
+  const gridGenerator = new GridGenerator(wordGenerator, gridConfiguration);
   const grid = gridGenerator.generateGrid();
 
 
-  console.log(grid.toString());
+  // console.log(grid.toString());
 
   it('should...', () => {
   })

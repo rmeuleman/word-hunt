@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { WordGeneratorService } from '../word-generator.service';
 
 import { GridViewComponent } from './grid-view.component';
 
@@ -8,7 +11,9 @@ describe('GridViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GridViewComponent ]
+      declarations: [ GridViewComponent ],
+      imports: [FormsModule, RouterTestingModule],
+      providers: [WordGeneratorService]
     })
     .compileComponents();
 

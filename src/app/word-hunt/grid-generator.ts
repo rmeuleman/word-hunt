@@ -1,20 +1,23 @@
 import { Grid } from "./grid";
+import { GridConfiguration } from "./grid-configuration";
 import { GridScanner } from "./grid-scanner";
 import { getRandomNumber, pickRandomItem } from "./random";
 import { WordGenerator } from "./word-generator";
 
 export class GridGenerator {
   private wordGenerator: WordGenerator;
-
+  private gridConfiguration: GridConfiguration;
   constructor(
-    wordGenerator: WordGenerator
+    wordGenerator: WordGenerator,
+    gridConfiguration: GridConfiguration
   )
   {
     this.wordGenerator = wordGenerator;
+    this.gridConfiguration = gridConfiguration;
   }
 
   public generateGrid(): Grid {
-    const grid = Grid.create(6);
+    const grid = Grid.create(this.gridConfiguration.gridSize);
     const gridScanner = new GridScanner(grid);
 
     var wordLengthLimit = grid.size;
@@ -32,6 +35,10 @@ export class GridGenerator {
         wordLengthLimit--;
       }
     }
+
+    grid.cells.flatMap(cell => cell).filter(cell => cell.isEmpty()).forEach(cell => {
+      cell.putLetter('A');
+    });
 
     return grid;
   }
