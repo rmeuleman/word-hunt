@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GridViewComponent } from './grid-view/grid-view.component';
 import { WordGeneratorService } from './word-generator.service';
+import { WordLengthValidatorDirective } from './grid-configuration-form/word-length.directive';
 
 @NgModule({
-  declarations: [
-    GridViewComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule

@@ -1,0 +1,14 @@
+#gridView {
+  max-width: 21cm; /* Longueur de feuille A4 */
+  margin: 3px;
+}
+
+#wordList {
+  border-style: solid;
+  border-width: 1px;
+}
+
+#wordList .word {
+  font-family: Arial;
+  color: black;
+}

@@ -8,9 +8,9 @@ export class Grid {
   readonly size: number;
   readonly words: string[];
 
-  public static MINIMUM_SIZE = 2;
+  private static readonly MIN_SIZE = 2;
 
-  private static REGEX_WORD = new RegExp('^[a-zA-Z]{2,}$')
+  public static REGEX_WORD = new RegExp('^[a-zA-Z]{2,}$')
 
   private constructor(
     cells:Cell[][],
@@ -23,8 +23,8 @@ export class Grid {
   }
 
   public static create(size: number): Grid {
-    if(size < Grid.MINIMUM_SIZE) {
-      throw new Error(`size must be greather than ${Grid.MINIMUM_SIZE}`);
+    if(size < Grid.MIN_SIZE) {
+      throw new Error(`size must be greather than ${Grid.MIN_SIZE}`);
     }
     
     var cells: Cell[][] = [];
@@ -60,11 +60,11 @@ export class Grid {
     for(var index = 0; index < word.length; index++) {
       let location = new Location(firstLetterLocation.row + (vector.row * index), firstLetterLocation.column + (vector.column * index))
       if(location.row < 0 || location.column < 0 || location.row >= this.size || location.column >= this.size) {
-        throw new Error('word crosses grid boundaries');
+        throw new Error(`word crosses grid boundaries: ${word}`);
       }
 
       if(!this.cells[location.row][location.column].isEmpty()) {
-        throw new Error('word overlaps another');
+        throw new Error(`word overlaps another: ${word}`);
       }
     }
 
@@ -85,6 +85,7 @@ export class Grid {
       }
       s+= '|\n';
     }
+    s += '\n' + this.words;
     return s;
   }
 }

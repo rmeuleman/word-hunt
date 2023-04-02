@@ -68,25 +68,25 @@ describe('Grid', () => {
       const grid = Grid.create(4);
       const location = new Location(0,0); 
       const vector = Vector.create(Direction.LEFT);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries: MOT');
     })
     it('should throw exception when the word crosses the grid boundaries from right', () => {
       const grid = Grid.create(4);
       const location = new Location(0,3); 
       const vector = Vector.create(Direction.RIGHT);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries: MOT');
     })
     it('should throw exception when the word crosses the grid boundaries from up', () => {
       const grid = Grid.create(4);
       const location = new Location(0,0); 
       const vector = Vector.create(Direction.UP);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries: MOT');
     })
     it('should throw exception when the word crosses the grid boundaries from down', () => {
       const grid = Grid.create(4);
       const location = new Location(3,0); 
       const vector = Vector.create(Direction.DOWN);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word crosses grid boundaries: MOT');
     })
 
     it('should fills cell on 3-letter word and right direction', () => {
@@ -126,28 +126,28 @@ describe('Grid', () => {
       grid.putWord('LE', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)))
       const location = new Location(0,3);
       const vector = Vector.create(Direction.LEFT);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another: MOT');
     })
     it('should throw exception when the word overlaps another from right', () => {
       const grid = Grid.create(4);
       grid.putWord('LE', new Disposition(new Location(0, 2), Vector.create(Direction.RIGHT)))
       const location = new Location(0,0); 
       const vector = Vector.create(Direction.RIGHT);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another: MOT');
     })
     it('should throw exception when the word overlaps another from up', () => {
       const grid = Grid.create(4);
       grid.putWord('LE', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)))
       const location = new Location(2,1);
       const vector = Vector.create(Direction.UP);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another: MOT');
     })
     it('should throw exception when the word overlaps another from down', () => {
       const grid = Grid.create(4);
       grid.putWord('LE', new Disposition(new Location(3, 0), Vector.create(Direction.RIGHT)))
       const location = new Location(1,1); 
       const vector = Vector.create(Direction.DOWN);
-      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another');
+      expect(() => grid.putWord('MOT', new Disposition(location, vector))).toThrowError('word overlaps another: MOT');
     })
   })
 });

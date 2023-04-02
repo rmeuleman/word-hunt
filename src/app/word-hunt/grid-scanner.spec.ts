@@ -13,9 +13,9 @@ describe('GridScanner', () => {
       const gridScanner = new GridScanner(grid);
 
       grid.putWord('LE', new Disposition(new Location(1, 0), Vector.create(Direction.DOWN)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
       grid.putWord('MOT', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
 
       expect(gridScanner.getResult()).toHaveSize(0);
     });
@@ -26,9 +26,9 @@ describe('GridScanner', () => {
       const gridScanner = new GridScanner(grid);
       
       grid.putWord('MOT', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
       grid.putWord('LIT', new Disposition(new Location(2, 0), Vector.create(Direction.RIGHT)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
 
       expect(gridScanner.getResult()).toHaveSize(2);
       
@@ -46,7 +46,7 @@ describe('GridScanner', () => {
       const grid = Grid.create(3);
 
       const gridScanner = new GridScanner(grid);
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
 
       expect(gridScanner.getResult()).toHaveSize(12);
       
@@ -81,9 +81,9 @@ describe('GridScanner', () => {
       
       const gridScanner = new GridScanner(grid);
       grid.putWord('DEUX', new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
       grid.putWord('MAIN', new Disposition(new Location(1, 0), Vector.create(Direction.RIGHT)));
-      gridScanner.scan(3);
+      gridScanner.scan("MOT");
 
       expect(gridScanner.getResult()).toHaveSize(8);
 
@@ -111,13 +111,13 @@ describe('GridScanner', () => {
       const gridScanner = new GridScanner(grid);
 
       grid.putWord('TROIS', new Disposition(new Location(0, 0), Vector.create(Direction.DOWN)));
-      gridScanner.scan(5);
+      gridScanner.scan("ROCHE");
       grid.putWord('ARBRE', new Disposition(new Location(0, 1), Vector.create(Direction.DOWN)));
-      gridScanner.scan(5);
+      gridScanner.scan("ROCHE");
       grid.putWord('CHIEN', new Disposition(new Location(0, 2), Vector.create(Direction.DOWN)));
-      gridScanner.scan(5);
+      gridScanner.scan("ROCHE");
       grid.putWord('MERDE', new Disposition(new Location(0, 3), Vector.create(Direction.DOWN)));
-      gridScanner.scan(5);
+      gridScanner.scan("ROCHE");
 
       expect(gridScanner.getResult()).toHaveSize(2);
 

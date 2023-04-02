@@ -13,4 +13,8 @@ export class Disposition {
     this.firstLetterLocation = firstLetterLocation;
     this.vector = vector;
   }
+
+  public toString(): string {
+    return this.firstLetterLocation.toString() + ":" + this.vector.toString(); 
+  }
 }

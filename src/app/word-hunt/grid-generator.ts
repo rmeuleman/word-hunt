@@ -20,13 +20,13 @@ export class GridGenerator {
     const grid = Grid.create(this.gridConfiguration.gridSize);
     const gridScanner = new GridScanner(grid);
 
-    var wordLengthLimit = grid.size;
+    var wordLengthLimit = this.gridConfiguration.maxWordLength;
 
-    while(wordLengthLimit > 2) {
-      gridScanner.scan(wordLengthLimit);
-      if(gridScanner.getResult().length > 0) {
-        let word = this.wordGenerator.findWord(getRandomNumber(3, wordLengthLimit));
-        if(word) {
+    while(wordLengthLimit >= this.gridConfiguration.minWordLength) {
+      let word = this.wordGenerator.findWord(getRandomNumber(this.gridConfiguration.minWordLength, wordLengthLimit));
+      if(word) {
+        gridScanner.scan(word);
+        if(gridScanner.getResult().length > 0) {
           grid.putWord(word, pickRandomItem(gridScanner.getResult()));
         } else {
           wordLengthLimit--;

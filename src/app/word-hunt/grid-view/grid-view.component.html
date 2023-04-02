@@ -1,12 +1,10 @@
-<div class="container ">
-  <div class="row">
-    <div class="col s8">
-      <canvas width="800" height="800" #gridCanvas></canvas>
-    </div>
-    <div class="col s4">
-      <ul *ngFor="let word of grid.words">
-        <li style="" class="black-text">{{word}}</li>
-      </ul>
+<div id="gridView">
+  <canvas #gridCanvas></canvas>
+  <div class="container-fluid">
+    <div class="row row-cols-6" id="wordList">
+      <div *ngFor="let word of grid.words" class="col">  
+        <span class="word">{{word}}</span>
+      </div>
     </div>
   </div>
 </div>

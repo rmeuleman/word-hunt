@@ -27,6 +27,12 @@ describe('Cell', () => {
       expect(() => cell.putLetter('abc')).toThrowError('invalid letter');
     });
 
+    it('should throw an error on a cell already filled', () => {
+      const cell = Cell.create(new Location(0,0));
+      cell.putLetter('a');
+      expect(() => cell.putLetter('b')).toThrowError('cell is already filled')
+    });
+
     it('should capitalize letter', () => {
       const cell = Cell.create(new Location(0,0));
       cell.putLetter('a');

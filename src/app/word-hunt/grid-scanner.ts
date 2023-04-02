@@ -17,7 +17,7 @@ export class GridScanner {
     this.result = [];
   }
 
-  public scan(wordLength: number) {
+  public scan(word: string) {
     this.result = [];
 
     const emptyCells = this.grid.cells.flatMap(cell => cell).filter(cell => cell.isEmpty());
@@ -27,7 +27,7 @@ export class GridScanner {
         let positionable = true;
         let index = 0;
         let vector = Vector.create(direction);
-        while(positionable && index < wordLength) {
+        while(positionable && index < word.length) {
           let location = new Location(emptyCell.location.row + (vector.row * index), emptyCell.location.column + (vector.column * index));
           if(location.row < 0 || location.column < 0 || location.row >= this.grid.size || location.column >= this.grid.size) {
             positionable = false;

@@ -18,6 +18,10 @@ export class Cell {
       throw new Error('invalid letter');
     }
 
+    if(this.letter) {
+      throw new Error('cell is already filled');
+    }
+
     this.letter = letter.toUpperCase();
   }
 

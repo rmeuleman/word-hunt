@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Grid } from './grid';
 import { WordGenerator } from './word-generator';
 
 @Injectable()
@@ -11,11 +12,12 @@ export class WordGeneratorService {
     request.send(null);
     const response = request.responseText
       .normalize('NFD').replace(/[\u0300-\u036f\u0153]/g, '') // supprimer les caractères indésirables
-      .replace('-', '') // supprimer les -
-      .replace('\'', '') // supprimer les '
       .toUpperCase();
 
-    this.wordGenerator = new WordGenerator(response.split('\n'));
+    const words = response.split('\n')
+      .filter(word => word.match(Grid.REGEX_WORD)); // supprimer les mots composés
+
+    this.wordGenerator = new WordGenerator(words);
   }
 
   public getWordGenerator(): WordGenerator {
