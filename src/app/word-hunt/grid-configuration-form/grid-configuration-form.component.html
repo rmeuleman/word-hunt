@@ -11,7 +11,7 @@
           [class.is-invalid]="gridSize.invalid"
           required
           min=10
-          max=20
+          max=25
           [(ngModel)]="gridConfiguration.gridSize" #gridSize="ngModel">
 
           <div *ngIf="gridSize.invalid && (gridSize.dirty || gridSize.touched)">
@@ -28,7 +28,7 @@
           [class.is-invalid]="minWordLength.invalid || gridConfigForm.errors?.['minWordLengthGreaterThanMaxWordLength']"
           required
           min=3
-          max=10
+          max=12
           [(ngModel)]="gridConfiguration.minWordLength" #minWordLength="ngModel">
 
           <div *ngIf="minWordLength.invalid && (minWordLength.dirty || minWordLength.touched)">
@@ -42,7 +42,7 @@
           [class.is-invalid]="maxWordLength.invalid || gridConfigForm.errors?.['minWordLengthGreaterThanMaxWordLength']"
           required
           min=3
-          max=10
+          max=12
           [(ngModel)]="gridConfiguration.maxWordLength" #maxWordLength="ngModel">
 
           <div *ngIf="maxWordLength.invalid && (maxWordLength.dirty || maxWordLength.touched)">

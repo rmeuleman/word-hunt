@@ -5,8 +5,11 @@ import { getRandomNumber, pickRandomItem } from "./random";
 import { WordGenerator } from "./word-generator";
 
 export class GridGenerator {
+  private readonly fillerLetters: string[] = 'THIERY'.split('');
+
   private wordGenerator: WordGenerator;
   private gridConfiguration: GridConfiguration;
+
   constructor(
     wordGenerator: WordGenerator,
     gridConfiguration: GridConfiguration
@@ -24,8 +27,8 @@ export class GridGenerator {
 
     while(wordLengthLimit >= this.gridConfiguration.minWordLength) {
       let word = this.wordGenerator.findWord(getRandomNumber(this.gridConfiguration.minWordLength, wordLengthLimit));
-      if(word) {
-        gridScanner.scan(word);
+      if(word && !grid.words.includes(word)) {
+        gridScanner.scan(word, this.gridConfiguration.wordDirections);
         if(gridScanner.getResult().length > 0) {
           grid.putWord(word, pickRandomItem(gridScanner.getResult()));
         } else {
@@ -36,8 +39,9 @@ export class GridGenerator {
       }
     }
 
+    // remplir les cellules vides
     grid.cells.flatMap(cell => cell).filter(cell => cell.isEmpty()).forEach(cell => {
-      cell.putLetter('A');
+      cell.putLetter(pickRandomItem(this.fillerLetters));
     });
 
     return grid;

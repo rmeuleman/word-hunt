@@ -10,7 +10,7 @@ export class GridConfiguration {
     public gridSize: number = 10,
     public minWordLength: number = 3,
     public maxWordLength: number = 6,
-    // public wordDirections: Direction[] = allDirections()
+    public wordDirections: Direction[] = allDirections()
   ) 
   {
 

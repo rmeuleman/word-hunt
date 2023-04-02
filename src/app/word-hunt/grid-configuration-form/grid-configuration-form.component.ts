@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Grid } from '../grid';
 import { GridConfiguration } from '../grid-configuration';
+import { GridConfigurationService } from '../grid-configuration.service';
 
 @Component({
   selector: 'app-grid-configuration-form',
@@ -13,7 +14,8 @@ export class GridConfigurationFormComponent implements OnInit {
   gridConfiguration: GridConfiguration;
   
   constructor(
-    private router: Router
+    private router: Router,
+    private gridConfigurationService: GridConfigurationService
   ) {}
 
   ngOnInit() {
@@ -21,7 +23,8 @@ export class GridConfigurationFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/grid-view'], {queryParams: this.gridConfiguration})
+    this.gridConfigurationService.setGridConfiguration(this.gridConfiguration);
+    this.router.navigate(['/grid-view']);
   }
   
 }

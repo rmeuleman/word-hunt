@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GridViewComponent } from './grid-view/grid-view.component';
 import { WordGeneratorService } from './word-generator.service';
 import { WordLengthValidatorDirective } from './grid-configuration-form/word-length.directive';
+import { GridConfigurationService } from './grid-configuration.service';
 
 @NgModule({
   declarations: [],
@@ -11,6 +12,6 @@ import { WordLengthValidatorDirective } from './grid-configuration-form/word-len
     CommonModule,
     FormsModule
   ],
-  providers: [WordGeneratorService]
+  providers: [WordGeneratorService, GridConfigurationService]
 })
 export class WordHuntModule { }

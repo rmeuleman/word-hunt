@@ -17,13 +17,13 @@ export class GridScanner {
     this.result = [];
   }
 
-  public scan(word: string) {
+  public scan(word: string, directions: Direction[] = allDirections()) {
     this.result = [];
 
     const emptyCells = this.grid.cells.flatMap(cell => cell).filter(cell => cell.isEmpty());
 
     emptyCells.forEach((emptyCell) => {
-      allDirections().forEach((direction) => {
+      directions.forEach((direction) => {
         let positionable = true;
         let index = 0;
         let vector = Vector.create(direction);

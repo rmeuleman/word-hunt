@@ -1,4 +1,15 @@
-<div id="gridView">
+<div *ngIf="!grid">
+  <p>Impossible de générer la grille...</p>
+</div>
+<div *ngIf="grid" id="gridView">
+  <div class="position-absolute top-0 end-0 d-print-none">
+    <button (click)="regenerateGrid()" class="btn">
+      <i class="bi bi-arrow-clockwise"></i>
+    </button>
+    <button routerLink="/grid-configuration" class="btn">
+      <i class="bi bi-gear-fill"></i>
+    </button>
+  </div>
   <canvas #gridCanvas></canvas>
   <div class="container-fluid">
     <div class="row row-cols-6" id="wordList">
