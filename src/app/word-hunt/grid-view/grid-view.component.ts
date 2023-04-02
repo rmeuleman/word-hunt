@@ -82,4 +82,14 @@ export class GridViewComponent implements OnInit, AfterViewInit {
     this.gridContext.clearRect(0, 0, this.gridContext.canvas.width, this.gridContext.canvas.width)
     this.drawGrid();
   }
+
+  public getWordSublists(sublists: number): string[][] {
+    const sortedWords = this.grid.words.sort();
+    const subarrayLength = Math.ceil((sortedWords.length / sublists));
+    var wordSublists: string[][] = [];
+    for(var i = 0; i < sublists; i++) {
+      wordSublists[i] = sortedWords.slice(i * subarrayLength, Math.min(((i * subarrayLength) + subarrayLength), sortedWords.length));
+    }
+    return wordSublists;
+  }
 }
