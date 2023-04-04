@@ -7,7 +7,6 @@
       <div class="form-group col-12">
         <label for="gridSize" class="form-label">Taille de la grille: </label>
         <input type="number" class="form-control" id="gridSize" name="gridSize"
-          [class.is-valid]="gridSize.valid"
           [class.is-invalid]="gridSize.invalid"
           required
           min=10
@@ -15,7 +14,11 @@
           [(ngModel)]="gridConfiguration.gridSize" #gridSize="ngModel">
 
           <div *ngIf="gridSize.invalid && (gridSize.dirty || gridSize.touched)">
-            <div *ngIf="gridSize.errors?.['required']" class="text-danger">La taille de la grille est requise.</div>
+            <span *ngIf="gridSize.errors?.['required']" class="text-danger">La taille de la grille est requise.</span>
+
+            <span *ngIf="gridSize.errors?.['min']" class="text-danger">La taille de la grille est trop petite. </span>
+
+            <span *ngIf="gridSize.errors?.['max']" class="text-danger">La taille de la grille est trop grande.</span>
           </div>
       </div>
     </div>
@@ -24,7 +27,6 @@
       <div class="form-group col-md-6">
         <label for="minWordLength" class="form-label">Taille minimum des mots:</label>
         <input type="number" class="form-control" id="minWordLength" name="minWordLength"
-          [class.is-valid]="minWordLength.valid"
           [class.is-invalid]="minWordLength.invalid || gridConfigForm.errors?.['minWordLengthGreaterThanMaxWordLength']"
           required
           min=3
@@ -33,12 +35,15 @@
 
           <div *ngIf="minWordLength.invalid && (minWordLength.dirty || minWordLength.touched)">
             <span *ngIf="minWordLength.errors?.['required']" class="text-danger">La taille minimum des mots est requise.</span>
+
+            <span *ngIf="minWordLength.errors?.['min']" class="text-danger">La taille minimum des mots est trop petite. </span>
+
+            <span *ngIf="minWordLength.errors?.['max']" class="text-danger">La taille minimum des mots est trop grande. </span>
           </div>
       </div>
       <div class="form-group col-md-6">
         <label for="maxWordLength" class="form-label">Taille maximum des mots:</label>
         <input type="number" class="form-control" id="maxWordLength" name="maxWordLength"
-          [class.is-valid]="maxWordLength.valid"
           [class.is-invalid]="maxWordLength.invalid || gridConfigForm.errors?.['minWordLengthGreaterThanMaxWordLength']"
           required
           min=3
@@ -47,27 +52,47 @@
 
           <div *ngIf="maxWordLength.invalid && (maxWordLength.dirty || maxWordLength.touched)">
             <span *ngIf="maxWordLength.errors?.['required']" class="text-danger">La taille maximum des mots est requise.</span>
+
+            <span *ngIf="maxWordLength.errors?.['min']" class="text-danger">La taille maximum des mots est trop petite. </span>
+
+            <span *ngIf="maxWordLength.errors?.['max']" class="text-danger">La taille maximum des mots est trop grande. </span>
           </div>
       </div>
       <div *ngIf="(gridConfigForm.touched || gridConfigForm.dirty) && gridConfigForm.errors?.['minWordLengthGreaterThanMaxWordLength']">
-        <span class="text-danger">La taille minimum des mots doit être inférieure à la taille des maximum des mots.</span>  
+        <span class="text-danger">La taille minimum des mots doit être inférieure à la taille maximum des mots.</span>  
       </div>
     </div>
 
     <div class="row mb-3">
-      <label for="directionOptions" class="form-label">Direction des mots:</label>
-      <div class="form-group col-12" id="directionOptions">
-        <div *ngFor="let directionOption of directionOptions; let i = index" class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" value={{i}} id={{directionOption.direction}} 
-            [checked]="directionOption.checked" 
-            (change)="directionOption.checked = !directionOption.checked"
-            [disabled]="isDisabledDirectionOption(directionOption)"
-          >
-          <label class="form-check-label" for={{directionOption.direction}}>
-            {{directionOption.label | uppercase}}
-          </label>
+      <div class="form-group col-12">
+        <label for="directionOptions" class="form-label">Direction des mots:</label>
+        <div id="directionOptions" class="row">
+          <div class="col-12 col-md-3">
+            <div *ngFor="let directionOption of directionOptions.slice(0, 4)" class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value={{directionOptions.indexOf(directionOption)}} id={{directionOption.direction}} 
+                [checked]="directionOption.checked" 
+                (change)="directionOption.checked = !directionOption.checked"
+                [disabled]="isDisabledDirectionOption(directionOption)"
+              >
+              <label class="form-check-label" for={{directionOption.direction}}>
+                {{directionOption.label | uppercase}}
+              </label>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div *ngFor="let directionOption of directionOptions.slice(4, 8)" class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" value={{directionOptions.indexOf(directionOption)}} id={{directionOption.direction}} 
+                [checked]="directionOption.checked" 
+                (change)="directionOption.checked = !directionOption.checked"
+                [disabled]="isDisabledDirectionOption(directionOption)"
+              >
+              <label class="form-check-label" for={{directionOption.direction}}>
+                {{directionOption.label | uppercase}}
+              </label>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
 
     <div class="row">

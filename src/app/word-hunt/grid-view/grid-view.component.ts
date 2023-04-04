@@ -60,6 +60,7 @@ export class GridViewComponent implements OnInit, AfterViewInit {
 
     this.grid.cells.flatMap(cell => cell).forEach(cell => {
       
+      // this.gridContext.lineWidth = 2;
       this.gridContext.beginPath();
       let x = (cell.location.column * this.cellSizeInPx);
       let y = (cell.location.row * this.cellSizeInPx);
@@ -91,5 +92,9 @@ export class GridViewComponent implements OnInit, AfterViewInit {
       wordSublists[i] = sortedWords.slice(i * subarrayLength, Math.min(((i * subarrayLength) + subarrayLength), sortedWords.length));
     }
     return wordSublists;
+  }
+
+  public openPrintView() {
+    window.print();
   }
 }

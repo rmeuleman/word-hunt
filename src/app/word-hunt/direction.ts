@@ -7,7 +7,6 @@ export const enum Direction {
   DOWN_LEFT = 'DOWN-LEFT',
   LEFT = 'LEFT',
   LEFT_UP = 'LEFT-UP'
-
 }
 
 export function allDirections() : Direction[] {
@@ -20,19 +19,4 @@ export function allDirections() : Direction[] {
       Direction.DOWN_LEFT,
       Direction.LEFT,
       Direction.LEFT_UP];
-}
-
-export function fromDirectionName(name: string): Direction {
-  switch(name) {
-    case 'UP':
-      return Direction.UP;
-    case 'RIGHT':
-      return Direction.RIGHT;
-    case 'DOWN':
-      return Direction.DOWN;
-    case 'LEFT':
-      return Direction.LEFT;
-    default:
-      throw new Error(`invalid direction name: ${name}`);
-  }
 }

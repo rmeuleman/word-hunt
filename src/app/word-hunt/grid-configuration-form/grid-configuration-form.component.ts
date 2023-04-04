@@ -15,22 +15,15 @@ export class GridConfigurationFormComponent implements OnInit {
 
   gridConfiguration: GridConfiguration;
 
-  // directions: [Direction, boolean][] = [
-  //   [Direction.UP, true],
-  //   [Direction.RIGHT, true],
-  //   [Direction.DOWN, false],
-  //   [Direction.LEFT, false],
-  // ];
-
   directionOptions: DirectionOption[] = [
     new DirectionOption(Direction.RIGHT, 'Vertical', true),
     new DirectionOption(Direction.DOWN, 'Horizontal', true),
-    new DirectionOption(Direction.UP, 'Horizontal inversé', true),
-    new DirectionOption(Direction.LEFT, 'Vertical inversé', true),
     new DirectionOption(Direction.RIGHT_DOWN, 'Diagonal bas-droite', true),
     new DirectionOption(Direction.UP_RIGHT, 'Diagonal haut-droite', true),
+    new DirectionOption(Direction.LEFT, 'Vertical inversé', true),
+    new DirectionOption(Direction.UP, 'Horizontal inversé', true),
     new DirectionOption(Direction.LEFT_UP, 'Diagonal bas-droite inversé', true),
-    new DirectionOption(Direction.RIGHT_DOWN, 'Diagonal haut-droite inversé', true),
+    new DirectionOption(Direction.DOWN_LEFT, 'Diagonal haut-droite inversé', true),
   ];
   
   constructor(
@@ -39,7 +32,15 @@ export class GridConfigurationFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.gridConfiguration = new GridConfiguration();
+    const gridConfiguration = this.gridConfigurationService.getGridConfiguration();
+    if(gridConfiguration) {
+      this.gridConfiguration = gridConfiguration;
+      this.directionOptions
+        .filter((directionOption) => !gridConfiguration.wordDirections.includes(directionOption.direction))
+        .map((directionOption) => directionOption.checked = false);
+    } else {
+      this.gridConfiguration = new GridConfiguration();
+    }
   }
 
   onSubmit() {
