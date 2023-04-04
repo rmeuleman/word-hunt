@@ -9,7 +9,7 @@ describe('GridScanner', () => {
   describe('getResult', () => {
     it('should return 0 dispotions for grid of size 3 and 3-letter word', () => {
       const grid = Grid.create(3);
-      
+
       const gridScanner = new GridScanner(grid);
 
       grid.putWord('LE', new Disposition(new Location(1, 0), Vector.create(Direction.DOWN)));
@@ -48,7 +48,7 @@ describe('GridScanner', () => {
       const gridScanner = new GridScanner(grid);
       gridScanner.scan("MOT");
 
-      expect(gridScanner.getResult()).toHaveSize(12);
+      expect(gridScanner.getResult()).toHaveSize(16);
       
       const expectedDispositions = [
         new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT)),
@@ -69,6 +69,11 @@ describe('GridScanner', () => {
 
         new Disposition(new Location(2, 2), Vector.create(Direction.LEFT)),
         new Disposition(new Location(2, 2), Vector.create(Direction.UP)),
+
+        new Disposition(new Location(0, 0), Vector.create(Direction.RIGHT_DOWN)),
+        new Disposition(new Location(0, 2), Vector.create(Direction.DOWN_LEFT)),
+        new Disposition(new Location(2, 0), Vector.create(Direction.UP_RIGHT)),
+        new Disposition(new Location(2, 2), Vector.create(Direction.LEFT_UP)),
       ]                            
 
       expectedDispositions.forEach(expectedDisposition => {

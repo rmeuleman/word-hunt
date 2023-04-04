@@ -54,6 +54,22 @@
       </div>
     </div>
 
+    <div class="row mb-3">
+      <label for="directionOptions" class="form-label">Direction des mots:</label>
+      <div class="form-group col-12" id="directionOptions">
+        <div *ngFor="let directionOption of directionOptions; let i = index" class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" value={{i}} id={{directionOption.direction}} 
+            [checked]="directionOption.checked" 
+            (change)="directionOption.checked = !directionOption.checked"
+            [disabled]="isDisabledDirectionOption(directionOption)"
+          >
+          <label class="form-check-label" for={{directionOption.direction}}>
+            {{directionOption.label | uppercase}}
+          </label>
+        </div>
+    </div>
+    </div>
+
     <div class="row">
       <div class="col-12">
         <button type="submit" class="btn btn-primary" name="generateGrid" [disabled]="gridConfigForm.invalid">Générer la grille</button>
