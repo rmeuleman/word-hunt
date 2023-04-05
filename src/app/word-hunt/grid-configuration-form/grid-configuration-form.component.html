@@ -95,6 +95,25 @@
       </div>
     </div>
 
+    <div class="row mb-3">
+      <div class="form-group col-12">
+        <label for="secretWord" class="form-label">Mot secret (optionnel): </label>
+        <input type="text" class="form-control" id="secretWord" name="secretWord"
+          [class.is-invalid]="secretWord.invalid"
+          placeholder="secret"
+          min=3
+          max=9  
+          [(ngModel)]="gridConfiguration.secretWord" #secretWord="ngModel">
+
+          <div *ngIf="secretWord.invalid && (secretWord.dirty || secretWord.touched)">
+
+            <span *ngIf="secretWord.errors?.['min']" class="text-danger">Le mot secret est trop petit.</span>
+
+            <span *ngIf="secretWord.errors?.['max']" class="text-danger">Le mot secret est trop grand.</span>
+          </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-12">
         <button type="submit" class="btn btn-primary" name="generateGrid" [disabled]="gridConfigForm.invalid">Générer la grille</button>

@@ -38,7 +38,13 @@ export class Grid {
     return new Grid(cells, size);
   }
 
-  public putWord(word: string, disposition: Disposition) {
+  /**
+   * Insére un mot dans la grille 
+   * @param word le mot à insérer
+   * @param disposition la disposition du mot
+   * @throws {Error} quand le mot ne peut pas être inséré
+   */
+  public putWord(word: string, disposition: Disposition): void | never {
     const {firstLetterLocation, vector} = disposition;
 
     if(firstLetterLocation.row < 0 || firstLetterLocation.column < 0 || firstLetterLocation.row >= this.size || firstLetterLocation.column >= this.size) {

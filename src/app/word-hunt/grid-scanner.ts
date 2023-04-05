@@ -17,6 +17,11 @@ export class GridScanner {
     this.result = [];
   }
 
+  /**
+   * Scan la grille et enregistre l'ensemble des dispositions pour un mot et des directions fournies
+   * @param word le mot
+   * @param directions les directions
+   */
   public scan(word: string, directions: Direction[] = allDirections()) {
     this.result = [];
 
@@ -45,6 +50,10 @@ export class GridScanner {
     })
   }
 
+  /**
+   * 
+   * @returns le résultat du dernier scan
+   */
   public getResult(): Disposition[] {
     return this.result;
   }
